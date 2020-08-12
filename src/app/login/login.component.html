@@ -1,0 +1,84 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-2 col-sm-3 col-ms-4 col-lg-4"> </div>
+        <div class="col-xs-8 col-sm-6 col-ms-4 col-lg-4"> 
+            <div class="example-container" *ngIf="!registerForm">
+                <form [formGroup]="loginForm" (submit)="submit()">
+                  <mat-form-field class="form-field" appearance="outline">
+                    <mat-label> E-mail
+                    </mat-label>
+                    <input matInput formControlName="email" required>
+                    <mat-error *ngIf="loginForm.controls.email.touched && loginForm.controls.email.invalid">
+                      <span *ngIf="loginForm.controls.email.errors.required">This field is mandatory.</span>
+                      <span *ngIf="loginForm.controls.email.errors.pattern">This field is invalid.</span>
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="form-field" appearance="outline">
+                    <mat-label> Password
+                    </mat-label>
+                    <input matInput formControlName="password" type="password">
+                    <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
+                      <span *ngIf="loginForm.controls.password.errors.required">This field is mandatory.</span>
+                    </mat-error>
+                  </mat-form-field>
+                  <button mat-raised-button color="primary" type="submit">Log In</button>
+                </form>
+            </div>
+            <div class="example-container" *ngIf="registerForm">
+              <form [formGroup]="loginForm" (submit)="submit()">
+                <mat-form-field class="form-field" appearance="outline">
+                  <mat-label> Name
+                  </mat-label>
+                  <input matInput formControlName="name" required>
+                  <mat-error *ngIf="loginForm.controls.name.touched && loginForm.controls.name.invalid">
+                    <span *ngIf="loginForm.controls.name.errors.required">This field is mandatory.</span>
+                    <span *ngIf="loginForm.controls.name.errors.pattern">This field is invalid.</span>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="outline">
+                  <mat-label> E-mail
+                  </mat-label>
+                  <input matInput formControlName="email" required>
+                  <mat-error *ngIf="loginForm.controls.email.touched && loginForm.controls.email.invalid">
+                    <span *ngIf="loginForm.controls.email.errors.required">This field is mandatory.</span>
+                    <span *ngIf="loginForm.controls.email.errors.pattern">This field is invalid.</span>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="outline">
+                  <mat-label> Password
+                  </mat-label>
+                  <input matInput formControlName="password" type="password">
+                  <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
+                    <span *ngIf="loginForm.controls.password.errors.required">This field is mandatory.</span>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="outline">
+                  <mat-label> Confirm Password
+                  </mat-label>
+                  <input matInput formControlName="confirmPassword" type="password">
+                  <mat-error *ngIf="loginForm.controls.confirmPassword.touched && loginForm.controls.confirmPassword.invalid">
+                    <span *ngIf="loginForm.controls.confirmPassword.errors.required">This field is mandatory.</span>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="outline">
+                  <mat-label> I agree to the <a href="#">terms and conditions</a>
+                  </mat-label>
+                  <input matInput formControlName="terms" type="checkbox">
+                  <mat-error *ngIf="loginForm.controls.terms.touched && loginForm.controls.terms.invalid">
+                    <span *ngIf="loginForm.controls.terms.errors.required">This field is mandatory.</span>
+                  </mat-error>
+                </mat-form-field>
+                <!-- <div class="control" controlErrorContainer>
+                  <label class="checkbox">
+                  <input type="checkbox" formControlName="terms" [customErrors]="customErrors">
+                  I agree to the <a href="#">terms and conditions</a>
+                  </label>
+                </div> -->
+                <button mat-raised-button color="primary" type="submit">Log In</button>
+              </form>
+            </div>
+        </div>
+        <div class="col-xs-2 col-sm-3 col-ms-4 col-lg-4"> </div>
+    </div>
+</div>

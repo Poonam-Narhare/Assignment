@@ -1,0 +1,180 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 post-cls">
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input type="tel" matInput placeholder="search">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </div>
+            <hr>
+            <div>
+                <mat-card class="title-cls">Post List</mat-card>
+                <cdk-virtual-scroll-viewport [itemSize]="10" style="height:445px">
+                    <div *cdkVirtualFor="let post of postList;let i = index">
+                        <div class="list-cls" (click)="getPostDetails(post)">
+                            
+                            <mat-card>{{post.title}}<mat-icon class="close-btn-cls" data-toggle="modal" data-target="#deletePost" (click)="deletePost(post)">close
+                            </mat-icon></mat-card>
+                        </div>
+                    </div>
+                </cdk-virtual-scroll-viewport>
+            </div>
+        </div>
+        <div class="col-lg-8 post-cls">
+            <div class="row my-5 py-2">
+            </div>
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <div class="container post-details-cls my-4 py-5" *ngIf="viewPostDetails">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label for="">User Id</label>
+                            </div>
+                            <div class="col-lg-10">
+                                {{userId}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label for="">Title</label>
+                            </div>
+                            <div class="col-lg-10">
+                                {{title}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label for="">Body</label>
+                            </div>
+                            <div class="col-lg-10">
+                                {{body}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                        </div>
+                        <div class="col-lg-2">
+                            <button data-toggle="modal" data-target="#addPost" mat-raised-button color="primary"
+                                type="submit">Add</button>
+                        </div>
+                        <div class="col-lg-2">
+                            <button data-toggle="modal" *ngIf="viewPostDetails" data-target="#editPost"
+                                mat-raised-button color="primary" type="submit">Update</button>
+                        </div>
+                        <div class="col-lg-4">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="addPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form [formGroup]="addPostForm" (ngSubmit)="onSubmit()" action="">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Add Post</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body m-2 p-2">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input input-cls" formControlName="userId" placeholder="userId">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input input-cls" formControlName="title" placeholder="Title">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input input-cls" formControlName="body" placeholder="Body">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="model-btn-cls" data-dismiss="modal" mat-raised-button color="basic"
+                        type="submit">Close</button>
+                    <button class="model-btn-cls" data-dismiss="modal" mat-raised-button color="primary"
+                        (click)="onSubmit()" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form [formGroup]="editPostForm" (ngSubmit)="onUpdate()" action="">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Update Post</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body m-2 p-2">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input input-cls" formControlName="userId" placeholder="userId">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input input-cls" formControlName="title" placeholder="Title">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input input-cls" formControlName="body" placeholder="Body">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="model-btn-cls" data-dismiss="modal" mat-raised-button color="basic"
+                        type="submit">Close</button>
+                    <button data-dismiss="modal" mat-raised-button color="primary" (click)="onUpdate()"
+                        type="submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deletePost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Delete Post</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body m-2 p-2">
+                <h4>Are you sure to delete this post</h4>
+            </div>
+            <div class="modal-footer">
+                <button class="model-btn-cls" data-dismiss="modal" mat-raised-button color="basic"
+                    type="submit">Close</button>
+                <button data-dismiss="modal" mat-raised-button color="primary" (click)="deletePost()"
+                    type="submit">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
